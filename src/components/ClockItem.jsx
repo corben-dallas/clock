@@ -38,8 +38,9 @@ export default class ClockItem extends Component {
   getTime = () => {
     const { timeZone } = this.props;
     const currentTime = new Date().getTime();
+    const currentTimeZone = Math.abs(new Date().getTimezoneOffset()) / 60;
     const timeZoneMillesecond = parseHoursToMilliseconds(timeZone);
-    let result = currentTime + (timeZoneMillesecond - (3 * 3600 * 1000))
+    const result = currentTime + (timeZoneMillesecond - (currentTimeZone * 3600 * 1000))
     
     this.setState({
       time: new Date(result),
